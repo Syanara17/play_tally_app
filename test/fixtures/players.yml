@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  jersey_number: 1
+  name: MyString
+  quarter_one_plays: 1
+  quarter_two_plays: 1
+  quarter_three_plays: 1
+  quarter_four_plays: 1
+  position: MyString
+  comment: MyString
+
+two:
+  jersey_number: 1
+  name: MyString
+  quarter_one_plays: 1
+  quarter_two_plays: 1
+  quarter_three_plays: 1
+  quarter_four_plays: 1
+  position: MyString
+  comment: MyString

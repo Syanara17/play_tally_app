@@ -60,6 +60,7 @@ GEM
       xpath (>= 2.0, < 4.0)
     childprocess (0.9.0)
       ffi (~> 1.0, >= 1.0.11)
+    cocoon (1.2.11)
     coderay (1.1.2)
     coffee-rails (4.2.2)
       coffee-script (>= 2.2.0)
@@ -225,6 +226,7 @@ DEPENDENCIES
   bootstrap-sass (= 3.3.7)
   byebug (= 9.0.6)
   capybara (~> 2.13)
+  cocoon
   coffee-rails (= 4.2.2)
   guard (= 2.13.0)
   guard-minitest (= 2.4.4)
@@ -233,6 +235,7 @@ DEPENDENCIES
   listen (= 3.1.5)
   minitest-reporters (= 1.1.14)
   pg (= 0.18.4)
+  pry
   puma (= 3.9.1)
   rails (= 5.1.6)
   rails-controller-testing (= 1.0.2)

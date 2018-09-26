@@ -1,0 +1,73 @@
+<%= form_for(setup_game(game), url: newgame_path) do |g| %>
+  <% if game.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(game.errors.count, "error") %> prohibited this game from being saved:</h2>
+
+      <ul>
+      <% game.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  
+  <h3>Score</h3>
+    <%= g.fields_for :score do |gs| %>
+    <table class="tg">
+      <tr>
+        <th class="tg-0pky" colspan="4">Visitor:</th>
+        <th class="tg-0lax" colspan="4">Home:</th>
+      </tr>
+      <tr>
+        <td class="tg-q8ud">Q1</td>
+        <td class="tg-q8ud">Q2</td>
+        <td class="tg-q8ud">Q3</td>
+        <td class="tg-sjuo">Q4</td>
+        <td class="tg-sjuo">Q1</td>
+        <td class="tg-sjuo">Q2</td>
+        <td class="tg-sjuo">Q3</td>
+        <td class="tg-sjuo">Q4</td>
+      </tr>
+      <tr>
+        <td class="tg-0pky"><%= gs.number_field :visit_quarter_one, class: 'form-control' %></td>
+        <td class="tg-0pky"><%= gs.number_field :visit_quarter_two, class: 'form-control' %></td>
+        <td class="tg-0pky"><%= gs.number_field :visit_quarter_three, class: 'form-control' %></td>
+        <td class="tg-0lax"><%= gs.number_field :visit_quarter_four, class: 'form-control' %></td>
+        <td class="tg-0lax"><%= gs.number_field :home_quarter_one, class: 'form-control' %></td>
+        <td class="tg-0lax"><%= gs.number_field :home_quarter_two, class: 'form-control' %></td>
+        <td class="tg-0lax"><%= gs.number_field :home_quarter_three, class: 'form-control' %></td>
+        <td class="tg-0lax"><%= gs.number_field :home_quarter_four, class: 'form-control' %></td>
+      </tr>
+    </table>
+
+    <br />
+    <h3>Plays</h3>
+  <table class="tg" width="100%">
+  <tr>
+    <th class="tg-s268" colspan="2"> Home Team Name: <%= g.text_field :home_team, class: 'form-control' %></th>
+    <th class="tg-s268" colspan="4">Coach: <%= g.text_field :coach, class: 'form-control' %></th>
+    <th class="tg-s268" colspan="2">Week #: <%= g.number_field :week, class: 'form-control' %></th>
+  </tr>
+  <tr>
+    <td class="tg-s268" colspan="2"> Visitor Team Name: <%= g.text_field :visitor_team, class: 'form-control' %></td>
+    <td class="tg-s268" colspan="4" style="text-align:center">Quarter<br></td>
+    <td class="tg-s268">Position:</td>
+    <td class="tg-s268">Comments:</td>
+  </tr>
+  <tr>
+    <td class="tg-s268">Jersey #: </td>
+    <td class="tg-s268">Player Name:</td>
+    <td class="tg-s268">1</td>
+    <td class="tg-s268">2</td>
+    <td class="tg-s268">3</td>
+    <td class="tg-s268">4</td>
+    <td class="tg-s268"></td>
+    <td class="tg-s268"></td>
+  </tr>
+</table>
+    <% end %>
+    <div class="actions">
+      <input name="commit" value="Finish & Save" data-disable-with="Create Game" type="submit">
+    </div>
+  
+<% end %>

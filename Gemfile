@@ -36,6 +36,11 @@ gem 'jquery-rails', '4.3.1'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
+#Gem for building nested forms
+gem 'cocoon'
+
+gem 'pry'
+
 group :development, :test do
   # Use sqlite3 as the database for Active Record
   gem 'sqlite3', '1.3.13'

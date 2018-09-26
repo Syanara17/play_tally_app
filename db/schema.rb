@@ -10,7 +10,46 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180619024017) do
+ActiveRecord::Schema.define(version: 20180926190742) do
+
+  create_table "games", force: :cascade do |t|
+    t.string "home_team"
+    t.string "visitor_team"
+    t.string "coach"
+    t.datetime "game_date"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "score_id"
+    t.integer "week"
+    t.index ["score_id"], name: "index_games_on_score_id"
+  end
+
+  create_table "players", force: :cascade do |t|
+    t.integer "jersey_number"
+    t.string "name"
+    t.integer "quarter_one_plays"
+    t.integer "quarter_two_plays"
+    t.integer "quarter_three_plays"
+    t.integer "quarter_four_plays"
+    t.string "position"
+    t.string "comment"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "scores", force: :cascade do |t|
+    t.integer "home_quarter_one"
+    t.integer "home_quarter_two"
+    t.integer "home_quarter_three"
+    t.integer "home_quarter_four"
+    t.integer "visit_quarter_one"
+    t.integer "visit_quarter_two"
+    t.integer "visit_quarter_three"
+    t.integer "visit_quarter_four"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "game_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "name"
@@ -18,7 +57,10 @@ ActiveRecord::Schema.define(version: 20180619024017) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "password_digest"
+    t.string "remember_digest"
+    t.integer "game_id"
     t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["game_id"], name: "index_users_on_game_id"
   end
 
 end

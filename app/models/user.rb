@@ -8,6 +8,8 @@ class User < ApplicationRecord
         format: {with: VALID_EMAIL_REGEX }, 
         uniqueness: { case_sensitive: false}
     has_secure_password
+    #We only accept users who have a lot of game
+    has_many :games
     validates :password, presence: true, length: { minimum: 6 }
     
     def User.digest(string)
