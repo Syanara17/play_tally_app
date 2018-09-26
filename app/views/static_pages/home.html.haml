@@ -1,0 +1,10 @@
+.center.jumbotron
+  %h1 Welcome to the Play Tally App
+  %h2
+    To begin using this app click the create game button below or Sign up!
+  - if logged_in?
+    = link_to "Create Game", newgame_path, class: "btn btn-lg btn-primary"
+  - else
+    = link_to "Sign Up!", signup_path, class: "btn btn-lg btn-primary"
+= link_to image_tag("rails.png", alt: "Rails logo"), |
+  'http://rubyonrails.org/'                          |

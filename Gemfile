@@ -40,6 +40,7 @@ gem 'jquery-rails', '4.3.1'
 gem 'cocoon'
 gem 'formtastic', '~> 3.0'
 gem 'pry'
+gem "haml-rails", "~> 1.0"
 
 group :development, :test do
   # Use sqlite3 as the database for Active Record

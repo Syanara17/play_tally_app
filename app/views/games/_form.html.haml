@@ -1,0 +1,62 @@
+= form_for(setup_game(game), url: newgame_path) do |g|
+  - if game.errors.any?
+    #error_explanation
+      %h2
+        = pluralize(game.errors.count, "error")
+        prohibited this game from being saved:
+      %ul
+        - game.errors.full_messages.each do |message|
+          %li= message
+  %h3 Score
+  = g.fields_for :score do |gs|
+    %table.tg
+      %tr
+        %th.tg-0pky{:colspan => "4"} Visitor:
+        %th.tg-0lax{:colspan => "4"} Home:
+      %tr
+        %td.tg-q8ud Q1
+        %td.tg-q8ud Q2
+        %td.tg-q8ud Q3
+        %td.tg-sjuo Q4
+        %td.tg-sjuo Q1
+        %td.tg-sjuo Q2
+        %td.tg-sjuo Q3
+        %td.tg-sjuo Q4
+      %tr
+        %td.tg-0pky= gs.number_field :visit_quarter_one, class: 'form-control'
+        %td.tg-0pky= gs.number_field :visit_quarter_two, class: 'form-control'
+        %td.tg-0pky= gs.number_field :visit_quarter_three, class: 'form-control'
+        %td.tg-0lax= gs.number_field :visit_quarter_four, class: 'form-control'
+        %td.tg-0lax= gs.number_field :home_quarter_one, class: 'form-control'
+        %td.tg-0lax= gs.number_field :home_quarter_two, class: 'form-control'
+        %td.tg-0lax= gs.number_field :home_quarter_three, class: 'form-control'
+        %td.tg-0lax= gs.number_field :home_quarter_four, class: 'form-control'
+    %br/
+    %h3 Plays
+    %table.tg{:width => "100%"}
+      %tr
+        %th.tg-s268{:colspan => "2"}
+          Home Team Name: #{g.text_field :home_team, class: 'form-control'}
+        %th.tg-s268{:colspan => "4"}
+          Coach: #{g.text_field :coach, class: 'form-control'}
+        %th.tg-s268{:colspan => "2"}
+          Week #: #{g.number_field :week, class: 'form-control'}
+      %tr
+        %td.tg-s268{:colspan => "2"}
+          Visitor Team Name: #{g.text_field :visitor_team, class: 'form-control'}
+        %td.tg-s268{:colspan => "4", :style => "text-align:center"}
+          Quarter
+          %br/
+          %td.tg-s268 Position:
+          %td.tg-s268 Comments:
+        %tr
+          %td.tg-s268 Jersey #:
+          %td.tg-s268 Player Name:
+          %td.tg-s268 1
+          %td.tg-s268 2
+          %td.tg-s268 3
+          %td.tg-s268 4
+          %td.tg-s268
+          %td.tg-s268
+    .actions
+      %input{"data-disable-with" => "Create Game", :name => "commit", :type => "submit", :value => "Finish  Save"}
