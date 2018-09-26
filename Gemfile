@@ -38,7 +38,7 @@ gem 'jquery-rails', '4.3.1'
 
 #Gem for building nested forms
 gem 'cocoon'
-
+gem 'formtastic', '~> 3.0'
 gem 'pry'
 
 group :development, :test do

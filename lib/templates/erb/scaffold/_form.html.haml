@@ -1,0 +1,10 @@
+\%= semantic_form_for @%= singular_name %&gt; do |f| %&gt;
+\%= f.inputs do %&gt;
+- attributes.each do |attribute|
+  \%= f.input :%= attribute.name %&gt; %&gt;
+\% end %&gt;
+
+\%= f.actions do %&gt;
+\%= f.action :submit, :as =&gt; :input %&gt;
+\% end %&gt;
+\% end %&gt;
