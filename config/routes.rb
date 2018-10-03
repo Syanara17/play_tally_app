@@ -8,11 +8,15 @@
     get  '/contact', to: 'static_pages#contact'
     get  '/signup',  to: 'users#new'
     get  '/newgame',  to: 'games#new'
-    post  '/newgame',  to: 'games#create'
+    post '/newgame',  to: 'games#create'
+    patch '/newgame/:id',  to: 'games#update'
+    patch '/games/:id(.:format)',      to:'games#update', as: 'update_game'
+    post '/savegame', to: 'games#save'
     post '/signup',  to: 'users#create'
     get  '/login',    to: 'sessions#new'
     post '/login',    to: 'sessions#create'
     delete '/logout',  to: 'sessions#destroy'
     resources :users
+    resources :games
   end
 

@@ -21,6 +21,17 @@ class GamesController < ApplicationController
   def edit
   end
 
+  def save
+    binding.pry
+    if(@game)
+      @game.save
+    else
+      @game = Game.new(game_params)
+    end
+
+    flash.now[:success] = "Game Saved!"
+  end
+
   # POST /games
   # POST /games.json
   def create
@@ -40,14 +51,12 @@ class GamesController < ApplicationController
   # PATCH/PUT /games/1
   # PATCH/PUT /games/1.json
   def update
-    respond_to do |format|
-      if @game.update(game_params)
-        format.html { redirect_to @game, notice: 'Game was successfully updated.' }
-        format.json { render :show, status: :ok, location: @game }
-      else
-        format.html { render :edit }
-        format.json { render json: @game.errors, status: :unprocessable_entity }
-      end
+    if @game.update(game_params)
+      # flash[:success] = "Game was successfully updated." 
+      redirect_to edit_game_path
+    else
+      flash.now[:error] = "oops there was an issue!" 
+      redirect_to edit_game_path
     end
   end
 
@@ -69,6 +78,9 @@ class GamesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def game_params
-      params.fetch(:game, {})
+      # params.fetch(:game, {})
+      params.require(:game).permit(:id, :current_quarter, :home_team, :visitor_team, :coach, :week, players_attributes: 
+        [:id, :jersey_number, :name, :quarter_one_plays, :quarter_two_plays, :quarter_three_plays, :quarter_four_plays,
+        :position, :comment, :_destroy])
     end
 end

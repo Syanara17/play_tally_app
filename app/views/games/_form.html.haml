@@ -1,5 +1,23 @@
-= form_for(setup_game(game), url: newgame_path) do |g|
-  - if game.errors.any?
+= simple_form_for(setup_game(@game), url: game_path, remote: true) do |f|
+  :javascript
+    var current_quarter = 1
+    $("input[id^='game_current_quarter_'").each(function(index, quarter){
+      if(quarter.checked){
+        current_quarter = index + 1;
+      }
+    })
+    $("#play_button").click(function(){
+      $("input[id$='quarter_one_plays']").each(function(index, play_counter){
+        if(play_counter.value == '' || play_counter.value == 0)
+        {
+          play_counter.value = 1;
+        }
+        else {
+          play_counter.value ++;
+        }
+      });
+    });
+  - if @game.errors.any?
     #error_explanation
       %h2
         = pluralize(game.errors.count, "error")
@@ -7,8 +25,27 @@
       %ul
         - game.errors.full_messages.each do |message|
           %li= message
+  = f.label :current_quarter
+  %br
+  .funkyradio
+    .funkyradio-success
+      = f.radio_button :current_quarter, 1, checked: @game.current_quarter == 1
+      %label{:for => "game_current_quarter_1"} Quarter One
+    .funkyradio-success
+      = f.radio_button :current_quarter, 2, checked: @game.current_quarter == 2
+      %label{:for => "game_current_quarter_2"} Quarter Two
+    .funkyradio-success
+      = f.radio_button :current_quarter, 3, checked: @game.current_quarter == 3
+      %label{:for => "game_current_quarter_3"} Quarter Three
+    .funkyradio-success
+      = f.radio_button :current_quarter, 4, checked: @game.current_quarter == 4
+      %label{:for => "game_current_quarter_4"} Quarter Four
+    .funkyradio-success
+      = f.radio_button :current_quarter, 5, checked: @game.current_quarter == 5
+      %label{:for => "game_current_quarter_5"} Overtime
+            
   %h3 Score
-  = g.fields_for :score do |gs|
+  = f.simple_fields_for :score do |gs|
     %table.tg
       %tr
         %th.tg-0pky{:colspan => "4"} Visitor:
@@ -31,21 +68,24 @@
         %td.tg-0lax= gs.number_field :home_quarter_two, class: 'form-control'
         %td.tg-0lax= gs.number_field :home_quarter_three, class: 'form-control'
         %td.tg-0lax= gs.number_field :home_quarter_four, class: 'form-control'
-    %br/
+    %br
     %h3 Plays
+    .actions
+      %input.btn.btn-lg.btn-success.center-block{"data-disable-with" => "Create Game", :name => "commit", :type => "submit", :value => "Play!", :id => "play_button"}
     %table.tg{:width => "100%"}
-      %tr
-        %th.tg-s268{:colspan => "2"}
-          Home Team Name: #{g.text_field :home_team, class: 'form-control'}
-        %th.tg-s268{:colspan => "4"}
-          Coach: #{g.text_field :coach, class: 'form-control'}
-        %th.tg-s268{:colspan => "2"}
-          Week #: #{g.number_field :week, class: 'form-control'}
-      %tr
-        %td.tg-s268{:colspan => "2"}
-          Visitor Team Name: #{g.text_field :visitor_team, class: 'form-control'}
-        %td.tg-s268{:colspan => "4", :style => "text-align:center"}
-          Quarter
+      %thead
+        %tr
+          %th.tg-s268{:colspan => "2"}
+            Home Team Name: #{f.text_field :home_team, class: 'form-control', required: true}
+          %th.tg-s268{:colspan => "4"}
+            Coach: #{f.text_field :coach, class: 'form-control', required: true}
+          %th.tg-s268{:colspan => "2"}
+            Week #: #{f.number_field :week, class: 'form-control', required: true}
+        %tr
+          %td.tg-s268{:colspan => "2"}
+            Visitor Team Name: #{f.text_field :visitor_team, class: 'form-control', required: true}
+          %td.tg-s268{:colspan => "4", :style => "text-align:center"}
+            Quarter
           %br/
           %td.tg-s268 Position:
           %td.tg-s268 Comments:
@@ -58,5 +98,8 @@
           %td.tg-s268 4
           %td.tg-s268
           %td.tg-s268
-    .actions
-      %input{"data-disable-with" => "Create Game", :name => "commit", :type => "submit", :value => "Finish  Save"}
+      %tbody.player
+        = f.simple_fields_for :players do |player|
+          = render 'player_fields', f: player
+    .links
+      = link_to_add_association 'add player', f, :players, class:'btn btn-secondary', data: {"association-insertion-node" => "tbody.player", "association-insertion-method" => "append"}
