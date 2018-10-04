@@ -1,14 +1,15 @@
 %p#notice= notice
 %h1 Games
-%table
+%table.table.table-striped
   %thead
     %tr
       %th{:colspan => "3"}
   %tbody
     - @games.each do |game|
       %tr
-        %td= link_to 'Show', game
+        %td{:colspan => "3"} #{game.home_team} at #{game.visitor_team} Week #{game.week}
         %td= link_to 'Edit', edit_game_path(game)
         %td= link_to 'Destroy', game, method: :delete, data: { confirm: 'Are you sure?' }
+
 %br/
 = link_to 'New Game', new_game_path
