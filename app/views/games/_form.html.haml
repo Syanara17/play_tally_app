@@ -1,13 +1,37 @@
-= simple_form_for(setup_game(@game), url: game_path, remote: true) do |f|
+= simple_form_for(setup_game(@game), remote: true) do |f|
   :javascript
+    function quarter_to_id (num){
+      var numString = "";
+    switch(num) {
+      case 1:
+      numString = "input[id$='quarter_one_plays']";
+          break;
+      case 2:
+      numString = "input[id$='quarter_two_plays']";
+          break;
+      case 3:
+      numString = "input[id$='quarter_three_plays']";
+          break;
+      case 4:
+      numString = "input[id$='quarter_four_plays']";
+          break;
+      case 5:
+      numString = "input[id$='overtime_plays']";
+          break;
+      default:
+      numString = "input[id$='quarter_one_plays']";
+      } 
+      return numString;
+    }
     var current_quarter = 1
-    $("input[id^='game_current_quarter_'").each(function(index, quarter){
-      if(quarter.checked){
-        current_quarter = index + 1;
-      }
-    })
+
     $("#play_button").click(function(){
-      $("input[id$='quarter_one_plays']").each(function(index, play_counter){
+      $("input[id^='game_current_quarter_'").each(function(index, quarter){
+        if(quarter.checked){
+          current_quarter = index + 1;
+        }
+      });
+      $(quarter_to_id(current_quarter)).each(function(index, play_counter){
         if(play_counter.value == '' || play_counter.value == 0)
         {
           play_counter.value = 1;
@@ -48,26 +72,30 @@
   = f.simple_fields_for :score do |gs|
     %table.tg
       %tr
-        %th.tg-0pky{:colspan => "4"} Visitor:
-        %th.tg-0lax{:colspan => "4"} Home:
+        %th.tg-0pky{:colspan => "5"} Visitor:
+        %th.tg-0lax{:colspan => "5"} Home:
       %tr
         %td.tg-q8ud Q1
         %td.tg-q8ud Q2
         %td.tg-q8ud Q3
         %td.tg-sjuo Q4
+        %td.tg-sjuo OT
         %td.tg-sjuo Q1
         %td.tg-sjuo Q2
         %td.tg-sjuo Q3
         %td.tg-sjuo Q4
+        %td.tg-sjuo OT
       %tr
         %td.tg-0pky= gs.number_field :visit_quarter_one, class: 'form-control'
         %td.tg-0pky= gs.number_field :visit_quarter_two, class: 'form-control'
         %td.tg-0pky= gs.number_field :visit_quarter_three, class: 'form-control'
         %td.tg-0lax= gs.number_field :visit_quarter_four, class: 'form-control'
+        %td.tg-0lax= gs.number_field :visit_overtime, class: 'form-control'
         %td.tg-0lax= gs.number_field :home_quarter_one, class: 'form-control'
         %td.tg-0lax= gs.number_field :home_quarter_two, class: 'form-control'
         %td.tg-0lax= gs.number_field :home_quarter_three, class: 'form-control'
         %td.tg-0lax= gs.number_field :home_quarter_four, class: 'form-control'
+        %td.tg-0lax= gs.number_field :home_overtime, class: 'form-control'
     %br
     %h3 Plays
     .actions
@@ -79,12 +107,12 @@
             Home Team Name: #{f.text_field :home_team, class: 'form-control', required: true}
           %th.tg-s268{:colspan => "4"}
             Coach: #{f.text_field :coach, class: 'form-control', required: true}
-          %th.tg-s268{:colspan => "2"}
+          %th.tg-s268{:colspan => "3"}
             Week #: #{f.number_field :week, class: 'form-control', required: true}
         %tr
           %td.tg-s268{:colspan => "2"}
             Visitor Team Name: #{f.text_field :visitor_team, class: 'form-control', required: true}
-          %td.tg-s268{:colspan => "4", :style => "text-align:center"}
+          %td.tg-s268{:colspan => "5", :style => "text-align:center"}
             Quarter
           %br/
           %td.tg-s268 Position:
@@ -96,6 +124,7 @@
           %td.tg-s268 2
           %td.tg-s268 3
           %td.tg-s268 4
+          %td.tg-s268 OT
           %td.tg-s268
           %td.tg-s268
       %tbody.player
@@ -103,3 +132,6 @@
           = render 'player_fields', f: player
     .links
       = link_to_add_association 'add player', f, :players, class:'btn btn-secondary', data: {"association-insertion-node" => "tbody.player", "association-insertion-method" => "append"}
+  .actions
+    %input.btn.btn-lg.btn-success.center-block{"data-disable-with" => "Create Game", :name => "commit", :type => "submit", :value => "Finish and Save!", :id => "finish"}
+  

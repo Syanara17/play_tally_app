@@ -1,6 +1,6 @@
 class Score < ApplicationRecord
 
-    belongs_to :game
+    belongs_to :game, optional: true
 
     def initializer()
         self.home_quarter_one = 0

@@ -22,7 +22,6 @@ class GamesController < ApplicationController
   end
 
   def save
-    binding.pry
     if(@game)
       @game.save
     else
@@ -52,8 +51,10 @@ class GamesController < ApplicationController
   # PATCH/PUT /games/1.json
   def update
     if @game.update(game_params)
-      # flash[:success] = "Game was successfully updated." 
-      redirect_to edit_game_path
+      if(params[:commit] == "Finish and Save!")
+        flash[:success] = "Game was successfully saved." 
+        redirect_to edit_game_path
+      end
     else
       flash.now[:error] = "oops there was an issue!" 
       redirect_to edit_game_path
@@ -81,6 +82,8 @@ class GamesController < ApplicationController
       # params.fetch(:game, {})
       params.require(:game).permit(:id, :current_quarter, :home_team, :visitor_team, :coach, :week, players_attributes: 
         [:id, :jersey_number, :name, :quarter_one_plays, :quarter_two_plays, :quarter_three_plays, :quarter_four_plays,
-        :position, :comment, :_destroy])
+        :position, :comment, :overtime_plays, :_destroy],
+        score_attributes:[:home_quarter_one, :home_quarter_two, :home_quarter_three, :home_quarter_four,
+        :visit_quarter_one, :visit_quarter_two, :visit_quarter_three, :visit_quarter_four, :home_overtime, :visit_overtime, :_destroy])
     end
 end
