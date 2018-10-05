@@ -7,7 +7,7 @@
   %tbody
     - @games.each do |game|
       %tr
-        %td{:colspan => "3"} #{game.home_team} at #{game.visitor_team} Week #{game.week}
+        %td{:colspan => "3"} #{game.visitor_team} at #{game.home_team} Week #{game.week}
         %td= link_to 'Edit', edit_game_path(game)
         %td= link_to 'Destroy', game, method: :delete, data: { confirm: 'Are you sure?' }
 

@@ -1,11 +1,10 @@
-%tr.nested-fields{:onclick => "player_activation(this)"}
+%tr.nested-fields.tr-green
   %td= f.input :jersey_number
   %td= f.input :name
-  %td= f.input :quarter_one_plays
-  %td= f.input :quarter_two_plays
-  %td= f.input :quarter_three_plays
-  %td= f.input :quarter_four_plays
-  %td= f.input :overtime_plays
+  %td
+    %button.btn.btn-primary{:onclick => "player_activation(this)"} Deactivate
+  %td.dynamic_quarter_counter
+    = f.input :quarter_one_plays
   %td= f.input :position
   %td= f.input :comment
-  %td= link_to_remove_association 'remove player', f
+  %td= link_to_remove_association 'remove player', f, {class: "btn btn-primary"}

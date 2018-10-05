@@ -177,6 +177,28 @@ color: red;
     color: $state-danger-text;
   }
 }
+/* Primary table */
+.thead-green {
+ background-color: #5cb85c !important;
+}
+
+.tr-green {
+  background:#5cb85c !important;
+}
+
+.tr-grey{background:grey !important;}
+
+.btn-primary {
+  color: #fff;
+  background-color: #5cb85c;
+  border-color: grey; /*set the color you want here*/
+}
+
+.btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open>.dropdown-toggle.btn-primary {
+  color: #fff;
+  background-color: grey;
+  border-color: #5cb85c; /*set the color you want here*/
+}
 
 /* Generated Table */
 .tg  {
@@ -225,8 +247,7 @@ color: red;
 .tg .tg-0lax{text-align:left;vertical-align:top;border-color:#bbb;}
 .tg .tg-sjuo{background-color:#C2FFD6;text-align:left;vertical-align:top;border-color:#bbb;}
 
-/* Player Deactivation */
-.high-light{background:grey !important;}
+
 
 /* Quarter Selector */
 
