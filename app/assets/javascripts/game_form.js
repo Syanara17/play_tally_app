@@ -1,8 +1,5 @@
 $(document).ready(function() {
-    dyanmic_quarter_label();
-    console.log("WINDOW LOADED!");
     $('#player-cocoon').on('cocoon:after-insert', function(e, insertedItem){
-        console.log("I ADDED A ROW");
         dyanmic_quarter_label();
     });
 });
