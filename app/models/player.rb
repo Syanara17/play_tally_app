@@ -1,7 +1,5 @@
 class Player < ApplicationRecord
     belongs_to :game
 
-    def initializer()
-        
-    end
+    validates_uniqueness_of :jersey_number, scope: :game_id
 end

@@ -40,9 +40,7 @@ $(document).ready(function() {
  }
 
   function player_activation(button){
-    console.log(button);
     row = button.parentNode.parentNode
-    console.log(row);
     if(row.classList[1] == "tr-green"){
       $(row).removeClass("tr-green");
       $(row).addClass("tr-grey");
