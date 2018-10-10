@@ -188,6 +188,14 @@ color: red;
 
 .tr-grey{background:grey !important;}
 
+.btn-success{
+  color: #fff;
+  background-color: #5cb85c;
+  border-color: grey; 
+  width: 50%;
+  padding: 28px 38px;
+}
+
 .btn-primary {
   color: #fff;
   background-color: #5cb85c;
@@ -201,6 +209,12 @@ color: red;
 }
 
 /* Generated Table */
+.tdcenter{
+  font-weight: bold;
+  text-align: center;
+  vertical-align: middle !important;
+}
+
 .tg  {
   border-collapse:collapse;
   border-spacing:0;
@@ -208,6 +222,7 @@ color: red;
 }
 .tg td{
   font-family:Arial, sans-serif;
+  font-weight: bold;
   font-size:14px;
   padding:10px 5px;
   border-style:solid;

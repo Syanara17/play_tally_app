@@ -1,7 +1,7 @@
 = simple_form_for(setup_game(@game), remote: true) do |f|
   = javascript_include_tag "game_form.js"
   :javascript 
-    dyanmic_quarter_label();
+    window.onload = function(){dyanmic_quarter_label();}
   - if @game.errors.any?
     #error_explanation
       %h2
@@ -61,6 +61,7 @@
     %h3 Plays
     .actions
       %input.btn.btn-lg.btn-success.center-block{"data-disable-with" => "Create Game", :name => "commit", :type => "submit", :value => "Play!", :id => "play_button", :onClick => "play_count()"}
+  %br
   #player-cocoon
     %table.table{:width => "100%"}
       %thead.thead-green
@@ -72,21 +73,19 @@
           %th{:colspan => "3"}
             Week #: #{f.number_field :week, class: 'form-control', required: true}
         %tr
-          %td{:colspan => "2"}
+          %td.tdcenter{:colspan => "2"}
             Visitor Team Name: #{f.text_field :visitor_team, class: 'form-control', required: true}
-          %td Active
-          %td{:style => "text-align:center"}
-            Plays this quarter
-          %br/
-          %td Position:
-          %td Comments:
-          %td Remove Player Button
+          %td.tdcenter Active
+          %td.tdcenter Plays this quarter
+          %td.tdcenter Position:
+          %td.tdcenter Comments:
+          %td.tdcenter Remove Player Button
       %tbody.player
         = f.simple_fields_for :players do |player|
           = render 'player_fields', f: player
     .links
-      = link_to_add_association 'add player', f, :players, class: 'btn btn-success', onclick: "dyanmic_quarter_label ()", data: {"association-insertion-node" => "tbody.player", "association-insertion-method" => "append"}
+      = link_to_add_association 'add player', f, :players, class: 'btn btn-primary', onclick: "dyanmic_quarter_label ()", data: {"association-insertion-node" => "tbody.player", "association-insertion-method" => "append"}
     %br
   .actions
-    %input.btn.btn-lg.btn-success.center-block{"data-disable-with" => "Create Game", :name => "commit", :type => "submit", :value => "Finish and Save!", :id => "finish"}
+    %input.btn.btn-lg.btn-primary.center-block{"data-disable-with" => "Create Game", :name => "commit", :type => "submit", :value => "Finish and Save!", :id => "finish"}
   

@@ -8,6 +8,7 @@
     get  '/contact', to: 'static_pages#contact'
     get  '/signup',  to: 'users#new'
     get  '/newgame',  to: 'games#new'
+    get  '/games/plays', to: 'games#get_plays'
     post '/games/new',  to: 'games#create'
     patch '/newgame/:id',  to: 'games#update'
     patch '/games/:id(.:format)',  to:'games#update', as: 'update_game'

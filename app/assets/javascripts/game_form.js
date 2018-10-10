@@ -1,8 +1,8 @@
-$(document).ready(function() {
+window.onload = function() {
     $('#player-cocoon').on('cocoon:after-insert', function(e, insertedItem){
         dyanmic_quarter_label();
     });
-});
+};
   
   function quarter_to_word (num){
     var numString = "";
@@ -41,11 +41,11 @@ $(document).ready(function() {
     if(row.classList[1] == "tr-green"){
       $(row).removeClass("tr-green");
       $(row).addClass("tr-grey");
-      $(button).html('Activate');
+      $(button).html('Off Field');
     } else if (row.classList[1] == "tr-grey") {
       $(row).removeClass("tr-grey");
       $(row).addClass("tr-green");
-      $(button).html('Deactivate');
+      $(button).html('On Field');
     }
   }
   
@@ -58,15 +58,13 @@ $(document).ready(function() {
         }
     });
     $("input[id$='" + quarter_to_word(current_quarter) + "_plays']").each(function(index, play_counter){
-        row = play_counter.parentNode.parentNode.parentNode
-        if(row.classList.value.split(" ").indexOf("tr-green") > -1){
-            if(play_counter.value == '' || play_counter.value == 0)
-            {
-                play_counter.value = 1;
-            } else {
-                play_counter.value ++;
-            }
+        if(play_counter.value == '' || play_counter.value == 0)
+        {
+            play_counter.value = 1;
+        } else {
+            play_counter.value ++;
         }
+        
     });
   }
   
@@ -98,21 +96,25 @@ $(document).ready(function() {
   }
 
     function change_input_quarter (target, node) {
-        var text_target = "";
-        input_div = node.childNodes[1];
-        label_tag = input_div.childNodes[0]
-        input_tag = input_div.childNodes[1]
-        swap_class(target, input_div);
-        label_tag.textContent = titleCase(quarter_to_word(target).replace("_"," ")) + " Plays";
-        for_string = $(label_tag).attr('for');
-        for_string = swap_quarter_for_player(for_string, target);
-        $(label_tag).attr('for', swap_quarter_for_player(for_string, target));
-        $(input_tag).attr('id', for_string)
-        nameString = $(input_tag).attr('name');
-        player_id = nameString.split(/\[(.*?)\]/)[3];
-        new_name = "game[players_attributes][" + player_id + "][" + quarter_to_word(target) + "_plays]";
-        $(input_tag).attr('name', new_name);
+        $(node).children('input').each(function (index, fieldNode) {
+            
+            if(!$(fieldNode).hasClass('hidden')){
+                $(fieldNode).addClass('hidden');
+                fieldNode.type = "hidden";
+            }
+            if(index == target - 1){
+                $(fieldNode).removeClass('hidden');
+                fieldNode.type = "number";
+            }
+        });        
     }
+
+//   function get_quarter_plays_value(quarter, player){
+//     var params = '{"quarter": "' + quarter + '", "player_id":"' + player + '"}';
+//     $.get('/games/plays', params, function(data){
+//         console.log(data);
+//     });
+//   }
 
   function dyanmic_quarter_label () {
     if($("#game_current_quarter_1")[0].checked == true){
