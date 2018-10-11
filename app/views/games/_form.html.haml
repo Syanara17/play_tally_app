@@ -33,19 +33,19 @@
   = f.simple_fields_for :score do |gs|
     %table.table.table-condensed.thead-green
       %tr
-        %th.tg-0pky{:colspan => "5"} Visitor:
-        %th.tg-0lax{:colspan => "5"} Home:
+        %th.tg-0pky.tdwhite{:colspan => "5"} Visitor:
+        %th.tg-0lax.tdwhite{:colspan => "5"} Home:
       %tr
-        %td.tg-q8ud Q1
-        %td.tg-q8ud Q2
-        %td.tg-q8ud Q3
-        %td.tg-sjuo Q4
-        %td.tg-sjuo OT
-        %td.tg-sjuo Q1
-        %td.tg-sjuo Q2
-        %td.tg-sjuo Q3
-        %td.tg-sjuo Q4
-        %td.tg-sjuo OT
+        %td.tg-q8ud.tdwhite Q1
+        %td.tg-q8ud.tdwhite Q2
+        %td.tg-q8ud.tdwhite Q3
+        %td.tg-sjuo.tdwhite Q4
+        %td.tg-sjuo.tdwhite OT
+        %td.tg-sjuo.tdwhite Q1
+        %td.tg-sjuo.tdwhite Q2
+        %td.tg-sjuo.tdwhite Q3
+        %td.tg-sjuo.tdwhite Q4
+        %td.tg-sjuo.tdwhite OT
       %tr
         %td.tg-0pky= gs.number_field :visit_quarter_one, class: 'form-control'
         %td.tg-0pky= gs.number_field :visit_quarter_two, class: 'form-control'
@@ -65,7 +65,7 @@
   #player-cocoon
     %table.table{:width => "100%"}
       %thead.thead-green
-        %tr
+        %tr.tdwhite
           %th{:colspan => "2"}
             Home Team Name: #{f.text_field :home_team, class: 'form-control', required: true}
           %th{:colspan => "4"}
@@ -77,6 +77,7 @@
             Visitor Team Name: #{f.text_field :visitor_team, class: 'form-control', required: true}
           %td.tdcenter Active
           %td.tdcenter Plays this quarter
+          %td.tdcenter Total Plays
           %td.tdcenter Position:
           %td.tdcenter Comments:
           %td.tdcenter Remove Player Button

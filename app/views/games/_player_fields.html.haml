@@ -1,14 +1,25 @@
 %tr.nested-fields.tr-green
-  %td= f.input :jersey_number
-  %td= f.input :name
+  %td
+    = f.label :jersey_number, "Jersey Number", {class: "tdwhite"}
+    = f.input_field :jersey_number
+  %td
+    = f.label :name, "Name", {class: "tdwhite"}
+    = f.input_field :name
   %td.tdcenter
-    %button.btn.btn-primary{:onclick => "player_activation(this)"} On Field
-  %td.dynamic_quarter_counter.tdcenter
+    %button.btn.btn-on-field{:onclick => "player_activation(this)"} On
+  %td.dynamic_quarter_counter.tdcenter-no-color
     = f.input_field :quarter_one_plays
     = f.input_field :quarter_two_plays, :as => :hidden
     = f.input_field :quarter_three_plays, :as => :hidden
     = f.input_field :quarter_four_plays, :as => :hidden
     = f.input_field :overtime_plays, :as => :hidden
-  %td= f.input :position
-  %td= f.input :comment
-  %td= link_to_remove_association 'remove player', f, {class: "btn btn-primary"}
+  %td
+    %span.tdcenter
+      = f.object.total_plays
+  %td
+    = f.label :position, "Position", {class: "tdwhite"}
+    = f.input_field :position
+  %td
+    = f.label :comment, "Comment", {class: "tdwhite"}
+    = f.input_field :comment
+  %td= link_to_remove_association 'remove player', f, {class: "btn btn-primary tdcenter"}
