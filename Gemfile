@@ -71,7 +71,7 @@ group :test do
 end
 
 group :production do
-  gem 'pg', '0.18.4',
+  gem 'pg', '0.18.4'
     gem 'web-console',           '3.5.1'
   gem 'listen',                '3.1.5'
   gem 'spring',                '2.0.2'
