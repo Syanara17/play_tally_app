@@ -1,9 +1,11 @@
-window.onload = function() {
-    $('#player-cocoon').on('cocoon:after-insert', function(e, insertedItem){
-        dyanmic_quarter_label();
-    });
-};
-  
+// console.log("RAN");
+dyanmic_quarter_label();
+check_activations();
+$('#player-cocoon').on('cocoon:after-insert', function(e, insertedItem){
+    dyanmic_quarter_label();
+});
+
+
   function quarter_to_word (num){
     var numString = "";
   switch(num) {
@@ -36,23 +38,37 @@ window.onload = function() {
     return splitStr.join(' '); 
  }
 
+    function check_activations(){
+        
+        $('.activator').each(function(index, tdNode){
+            checkboxNode = tdNode.children[1].children[0].children[1].children[0]
+            if(checkboxNode.checked == true){
+                player_activation(tdNode.firstElementChild);
+            } 
+        })
+    }
+
   function player_activation(button){
     row = button.parentNode.parentNode
+    checkbox = button.nextElementSibling.children[0].children[1].children[0]
+    //if on turn off
     if(row.classList[1] == "tr-green"){
       $(row).removeClass("tr-green");
       $(row).addClass("tr-grey");
       $(button).html('Off');
       $(button).removeClass("btn-on-field");
       $(button).addClass("btn-off-field");
+      checkbox.checked = false;
+      //if off turn on
     } else if (row.classList[1] == "tr-grey") {
       $(row).removeClass("tr-grey");
       $(row).addClass("tr-green");
       $(button).html('On');
       $(button).removeClass("btn-off-field");
       $(button).addClass("btn-on-field");
+      checkbox.checked = true;
     }
   }
-  
 
   function play_count(){
     var current_quarter = 1      

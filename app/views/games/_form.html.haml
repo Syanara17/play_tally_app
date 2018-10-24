@@ -1,7 +1,5 @@
 = simple_form_for(setup_game(@game), remote: true) do |f|
   = javascript_include_tag "game_form.js"
-  :javascript 
-    window.onload = function(){dyanmic_quarter_label();}
   - if @game.errors.any?
     #error_explanation
       %h2
