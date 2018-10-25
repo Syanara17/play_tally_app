@@ -179,50 +179,33 @@ color: red;
 }
 /* Primary table */
 .thead-green {
- background-color: #532f91 !important;
+ background-color: #5cb85c !important;
 }
 
 .tr-green {
-  background:#532f91 !important;
+  background:#5cb85c !important;
 }
 
 .tr-grey{background:grey !important;}
 
 .btn-success{
   color: #fff;
-  background-color: #532f91;
+  background-color: #5cb85c;
   border-color: grey; 
   width: 50%;
   padding: 28px 38px;
 }
 
-.btn-on-field{
-  color: #fff;
-  background-color: #50a755;
-  border-color: grey; 
-  // width: 50%;
-  padding: 20px 20px 20px 20px;
-}
-
-.btn-off-field{
-  color: #fff;
-  background-color: #c51010;
-  border-color: grey; 
-  // width: 50%;
-  padding: 20px 20px 20px 20px;
-}
-
-
 .btn-primary {
   color: #fff;
-  background-color: #532f91;
+  background-color: #5cb85c;
   border-color: grey; /*set the color you want here*/
 }
 
 .btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open>.dropdown-toggle.btn-primary {
   color: #fff;
   background-color: grey;
-  border-color: #532f91; /*set the color you want here*/
+  border-color: #5cb85c; /*set the color you want here*/
 }
 
 .hiddencb {
@@ -232,17 +215,7 @@ color: red;
 .tdcenter{
   font-weight: bold;
   text-align: center;
-  color: white;
   vertical-align: middle !important;
-}
-
-.tdcenter-no-color{
-  vertical-align: middle !important;
-}
-
-.tdwhite{
-  font-weight: bold;
-  color: white;
 }
 
 .tg  {
@@ -389,7 +362,7 @@ color: red;
 .funkyradio-success input[type="radio"]:checked ~ label:before,
 .funkyradio-success input[type="checkbox"]:checked ~ label:before {
   color: #fff;
-  background-color: #532f91;
+  background-color: #5cb85c;
 }
 
 .funkyradio-danger input[type="radio"]:checked ~ label:before,

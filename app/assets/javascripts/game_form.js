@@ -58,6 +58,7 @@ function player_activation(button){
     if(row.classList[1] == "tr-green"){
       $(row).removeClass("tr-green");
       $(row).addClass("tr-grey");
+<<<<<<< HEAD
       $(button).html('Off');
       $(button).removeClass("btn-on-field");
       $(button).addClass("btn-off-field");
@@ -70,6 +71,13 @@ function player_activation(button){
       $(button).removeClass("btn-off-field");
       $(button).addClass("btn-on-field");
       checkbox.checked = true;
+=======
+      $(button).html('Off Field');
+    } else if (row.classList[1] == "tr-grey") {
+      $(row).removeClass("tr-grey");
+      $(row).addClass("tr-green");
+      $(button).html('On Field');
+>>>>>>> parent of 2094cd8... Adjusted colors and fixed active functionality
     }
 }
   
@@ -81,17 +89,14 @@ function player_activation(button){
             current_quarter = index + 1;
         }
     });
-    
     $("input[id$='" + quarter_to_word(current_quarter) + "_plays']").each(function(index, play_counter){
-        if(play_counter.parentNode.parentNode.classList.contains("tr-grey") == false){
-            if(play_counter.value == '' || play_counter.value == 0)
-            {
-                play_counter.value = 1;
-            } else {
-                play_counter.value ++;
-            }
-            play_counter.parentNode.nextSibling.nextSibling.getElementsByTagName('span')[0].innerText ++;
-        };
+        if(play_counter.value == '' || play_counter.value == 0)
+        {
+            play_counter.value = 1;
+        } else {
+            play_counter.value ++;
+        }
+        
     });
   }
   

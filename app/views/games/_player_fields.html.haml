@@ -18,13 +18,6 @@
     = f.input_field :quarter_three_plays, :as => :hidden
     = f.input_field :quarter_four_plays, :as => :hidden
     = f.input_field :overtime_plays, :as => :hidden
-  %td
-    %span.tdcenter
-      = f.object.total_plays
-  %td
-    = f.label :position, "Position", {class: "tdwhite"}
-    = f.input_field :position
-  %td
-    = f.label :comment, "Comment", {class: "tdwhite"}
-    = f.input_field :comment
-  %td= link_to_remove_association 'remove player', f, {class: "btn btn-primary tdcenter"}
+  %td= f.input :position
+  %td= f.input :comment
+  %td= link_to_remove_association 'remove player', f, {class: "btn btn-primary"}
