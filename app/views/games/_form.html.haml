@@ -1,92 +1,90 @@
-= simple_form_for(setup_game(@game), remote: true) do |f|
-  = javascript_include_tag "game_form.js"
-  :javascript 
-    window.onload = function(){dyanmic_quarter_label();}
-  - if @game.errors.any?
-    #error_explanation
-      %h2
-        = pluralize(@game.errors.count, "error")
-        prohibited this game from being saved:
-      %ul
-        - @game.errors.full_messages.each do |message|
-          %li= message
-  = f.label :current_quarter
-  %br
-  .funkyradio
-    .funkyradio-success
-      = f.radio_button :current_quarter, 1, checked: @game.current_quarter == 1, onClick: "dyanmic_quarter_label ()"
-      %label{:for => "game_current_quarter_1"} Quarter One
-    .funkyradio-success
-      = f.radio_button :current_quarter, 2, checked: @game.current_quarter == 2, onClick: "dyanmic_quarter_label ()"
-      %label{:for => "game_current_quarter_2"} Quarter Two
-    .funkyradio-success
-      = f.radio_button :current_quarter, 3, checked: @game.current_quarter == 3, onClick: "dyanmic_quarter_label ()"
-      %label{:for => "game_current_quarter_3"} Quarter Three
-    .funkyradio-success
-      = f.radio_button :current_quarter, 4, checked: @game.current_quarter == 4, onClick: "dyanmic_quarter_label ()"
-      %label{:for => "game_current_quarter_4"} Quarter Four
-    .funkyradio-success
-      = f.radio_button :current_quarter, 5, checked: @game.current_quarter == 5, onClick: "dyanmic_quarter_label ()"
-      %label{:for => "game_current_quarter_5"} Overtime
-            
-  %h3 Score
-  = f.simple_fields_for :score do |gs|
-    %table.table.table-condensed.thead-green
-      %tr
-        %th.tg-0pky.tdwhite{:colspan => "5"} Visitor:
-        %th.tg-0lax.tdwhite{:colspan => "5"} Home:
-      %tr
-        %td.tg-q8ud.tdwhite Q1
-        %td.tg-q8ud.tdwhite Q2
-        %td.tg-q8ud.tdwhite Q3
-        %td.tg-sjuo.tdwhite Q4
-        %td.tg-sjuo.tdwhite OT
-        %td.tg-sjuo.tdwhite Q1
-        %td.tg-sjuo.tdwhite Q2
-        %td.tg-sjuo.tdwhite Q3
-        %td.tg-sjuo.tdwhite Q4
-        %td.tg-sjuo.tdwhite OT
-      %tr
-        %td.tg-0pky= gs.number_field :visit_quarter_one, class: 'form-control'
-        %td.tg-0pky= gs.number_field :visit_quarter_two, class: 'form-control'
-        %td.tg-0pky= gs.number_field :visit_quarter_three, class: 'form-control'
-        %td.tg-0lax= gs.number_field :visit_quarter_four, class: 'form-control'
-        %td.tg-0lax= gs.number_field :visit_overtime, class: 'form-control'
-        %td.tg-0lax= gs.number_field :home_quarter_one, class: 'form-control'
-        %td.tg-0lax= gs.number_field :home_quarter_two, class: 'form-control'
-        %td.tg-0lax= gs.number_field :home_quarter_three, class: 'form-control'
-        %td.tg-0lax= gs.number_field :home_quarter_four, class: 'form-control'
-        %td.tg-0lax= gs.number_field :home_overtime, class: 'form-control'
+#play-form
+  = simple_form_for(setup_game(@game), remote: true) do |f|
+    - if @game.errors.any?
+      #error_explanation
+        %h2
+          = pluralize(@game.errors.count, "error")
+          prohibited this game from being saved:
+        %ul
+          - @game.errors.full_messages.each do |message|
+            %li= message
+    = f.label :current_quarter
     %br
-    %h3 Plays
-    .actions
-      %input.btn.btn-lg.btn-success.center-block{"data-disable-with" => "Create Game", :name => "commit", :type => "submit", :value => "Play!", :id => "play_button", :onClick => "play_count()"}
-  %br
-  #player-cocoon
-    %table.table{:width => "100%"}
-      %thead.thead-green
-        %tr.tdwhite
-          %th{:colspan => "2"}
-            Home Team Name: #{f.text_field :home_team, class: 'form-control', required: true}
-          %th{:colspan => "4"}
-            Coach: #{f.text_field :coach, class: 'form-control', required: true}
-          %th{:colspan => "3"}
-            Week #: #{f.number_field :week, class: 'form-control', required: true}
+    .funkyradio
+      .funkyradio-success
+        = f.radio_button :current_quarter, 1, checked: @game.current_quarter == 1, onClick: "dyanmic_quarter_label ()"
+        %label{:for => "game_current_quarter_1"} Quarter One
+      .funkyradio-success
+        = f.radio_button :current_quarter, 2, checked: @game.current_quarter == 2, onClick: "dyanmic_quarter_label ()"
+        %label{:for => "game_current_quarter_2"} Quarter Two
+      .funkyradio-success
+        = f.radio_button :current_quarter, 3, checked: @game.current_quarter == 3, onClick: "dyanmic_quarter_label ()"
+        %label{:for => "game_current_quarter_3"} Quarter Three
+      .funkyradio-success
+        = f.radio_button :current_quarter, 4, checked: @game.current_quarter == 4, onClick: "dyanmic_quarter_label ()"
+        %label{:for => "game_current_quarter_4"} Quarter Four
+      .funkyradio-success
+        = f.radio_button :current_quarter, 5, checked: @game.current_quarter == 5, onClick: "dyanmic_quarter_label ()"
+        %label{:for => "game_current_quarter_5"} Overtime
+              
+    %h3 Score
+    = f.simple_fields_for :score do |gs|
+      %table.table.table-condensed.thead-green
         %tr
-          %td.tdcenter{:colspan => "2"}
-            Visitor Team Name: #{f.text_field :visitor_team, class: 'form-control', required: true}
-          %td.tdcenter Active
-          %td.tdcenter Plays this quarter
-          %td.tdcenter Total Plays
-          %td.tdcenter Position:
-          %td.tdcenter Comments:
-          %td.tdcenter Remove Player Button
-      %tbody.player
-        = f.simple_fields_for :players do |player|
-          = render 'player_fields', f: player
-    .links
-      = link_to_add_association 'add player', f, :players, class: 'btn btn-primary', onclick: "dyanmic_quarter_label ()", data: {"association-insertion-node" => "tbody.player", "association-insertion-method" => "append"}
+          %th.tg-0pky.tdwhite{:colspan => "5"} Visitor:
+          %th.tg-0lax.tdwhite{:colspan => "5"} Home:
+        %tr
+          %td.tg-q8ud.tdwhite Q1
+          %td.tg-q8ud.tdwhite Q2
+          %td.tg-q8ud.tdwhite Q3
+          %td.tg-sjuo.tdwhite Q4
+          %td.tg-sjuo.tdwhite OT
+          %td.tg-sjuo.tdwhite Q1
+          %td.tg-sjuo.tdwhite Q2
+          %td.tg-sjuo.tdwhite Q3
+          %td.tg-sjuo.tdwhite Q4
+          %td.tg-sjuo.tdwhite OT
+        %tr
+          %td.tg-0pky= gs.number_field :visit_quarter_one, class: 'form-control'
+          %td.tg-0pky= gs.number_field :visit_quarter_two, class: 'form-control'
+          %td.tg-0pky= gs.number_field :visit_quarter_three, class: 'form-control'
+          %td.tg-0lax= gs.number_field :visit_quarter_four, class: 'form-control'
+          %td.tg-0lax= gs.number_field :visit_overtime, class: 'form-control'
+          %td.tg-0lax= gs.number_field :home_quarter_one, class: 'form-control'
+          %td.tg-0lax= gs.number_field :home_quarter_two, class: 'form-control'
+          %td.tg-0lax= gs.number_field :home_quarter_three, class: 'form-control'
+          %td.tg-0lax= gs.number_field :home_quarter_four, class: 'form-control'
+          %td.tg-0lax= gs.number_field :home_overtime, class: 'form-control'
+      %br
+      %h3 Plays
+      .actions
+        %input.btn.btn-lg.btn-success.center-block{"data-disable-with" => "Create Game", :name => "commit", :type => "submit", :value => "Play!", :id => "play_button", :onClick => "play_count()"}
     %br
-  .actions
-    %input.btn.btn-lg.btn-primary.center-block{"data-disable-with" => "Create Game", :name => "commit", :type => "submit", :value => "Finish and Save!", :id => "finish"}
-  
+    #player-cocoon
+      %table.table{:width => "100%"}
+        %thead.thead-green
+          %tr.tdwhite
+            %th{:colspan => "2"}
+              Home Team Name: #{f.text_field :home_team, class: 'form-control', required: true}
+            %th{:colspan => "4"}
+              Coach: #{f.text_field :coach, class: 'form-control', required: true}
+            %th{:colspan => "3"}
+              Week #: #{f.number_field :week, class: 'form-control', required: true}
+          %tr
+            %td.tdcenter{:colspan => "2"}
+              Visitor Team Name: #{f.text_field :visitor_team, class: 'form-control', required: true}
+            %td.tdcenter Active
+            %td.tdcenter Plays this quarter
+            %td.tdcenter Total Plays
+            %td.tdcenter Position:
+            %td.tdcenter Comments:
+            %td.tdcenter Remove Player Button
+        %tbody.player
+          = f.simple_fields_for :players do |player|
+            = render 'player_fields', f: player
+      .links
+        = link_to_add_association 'add player', f, :players, class: 'btn btn-primary', onclick: "dyanmic_quarter_label ()", data: {"association-insertion-node" => "tbody.player", "association-insertion-method" => "append"}
+      %br
+    .actions
+      %input.btn.btn-lg.btn-primary.center-block{"data-disable-with" => "Create Game", :name => "commit", :type => "submit", :value => "Finish and Save!", :id => "finish"}
+    

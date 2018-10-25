@@ -1,8 +1,13 @@
-window.onload = function() {
-    $('#player-cocoon').on('cocoon:after-insert', function(e, insertedItem){
+document.addEventListener("turbolinks:load", function() {
+    if($("#play-form").length > 0){
+        $('#player-cocoon').on('cocoon:after-insert', function(e, insertedItem){
+            dyanmic_quarter_label();
+        });
         dyanmic_quarter_label();
-    });
-};
+        check_activations();
+    }
+})
+
   
   function quarter_to_word (num){
     var numString = "";
@@ -36,33 +41,38 @@ window.onload = function() {
     return splitStr.join(' '); 
  }
 
-//  function check_activations(){
-//     $('.activator').each(function(index, tdNode){
-//         checkboxNode = tdNode.children[1].children[0].children[1].children[0]
-//         if(checkboxNode.checked == true){
-//             player_activation(tdNode.firstElementChild);
-//         } 
-//     })
-// }
+ function check_activations(){
+    $('.activator').each(function(index, tdNode){
+        checkboxNode = tdNode.children[1].children[0].children[1].children[0]
+        if(checkboxNode.checked == true){
+            player_activation(tdNode.firstElementChild);
+        } 
+    })
+}
 
 
 
-  function player_activation(button){
+function player_activation(button){
     row = button.parentNode.parentNode
+    checkbox = button.nextElementSibling.children[0].children[1].children[0]
+    //if on turn off
     if(row.classList[1] == "tr-green"){
       $(row).removeClass("tr-green");
       $(row).addClass("tr-grey");
       $(button).html('Off');
       $(button).removeClass("btn-on-field");
       $(button).addClass("btn-off-field");
+      checkbox.checked = false;
+      //if off turn on
     } else if (row.classList[1] == "tr-grey") {
       $(row).removeClass("tr-grey");
       $(row).addClass("tr-green");
       $(button).html('On');
       $(button).removeClass("btn-off-field");
       $(button).addClass("btn-on-field");
+      checkbox.checked = true;
     }
-  }
+}
   
 
   function play_count(){
@@ -126,13 +136,6 @@ window.onload = function() {
             }
         });        
     }
-
-//   function get_quarter_plays_value(quarter, player){
-//     var params = '{"quarter": "' + quarter + '", "player_id":"' + player + '"}';
-//     $.get('/games/plays', params, function(data){
-//         console.log(data);
-//     });
-//   }
 
   function dyanmic_quarter_label () {
     if($("#game_current_quarter_1")[0].checked == true){

@@ -1,14 +1,16 @@
-%tr.nested-fields.tr-green
+%tr.nested-fields.tr-grey
   %td
     = f.label :jersey_number, "Jersey Number", {class: "tdwhite"}
     = f.input_field :jersey_number
   %td
     = f.label :name, "Name", {class: "tdwhite"}
     = f.input_field :name
-  %td.tdcenter
-    %button.btn.btn-on-field{:onclick => "player_activation(this)"} On
+  %td.tdcenter.activator
+    %button.btn.btn-off-field{:onclick => "player_activation(this)"} Off
+    .hiddencb
+      = f.input :active, as: :boolean
   %td.dynamic_quarter_counter.tdcenter-no-color
-    = f.input_field :quarter_one_plays
+    = f.input_field :quarter_one_plays, :as => :hidden
     = f.input_field :quarter_two_plays, :as => :hidden
     = f.input_field :quarter_three_plays, :as => :hidden
     = f.input_field :quarter_four_plays, :as => :hidden

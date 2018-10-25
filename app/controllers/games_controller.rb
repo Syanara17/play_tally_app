@@ -31,10 +31,6 @@ class GamesController < ApplicationController
     flash.now[:success] = "Game Saved!"
   end
 
-  def get_plays
-    binding.pry
-  end
-
   # POST /games
   # POST /games.json
   def create
@@ -86,7 +82,7 @@ class GamesController < ApplicationController
       # params.fetch(:game, {})
       params.require(:game).permit(:id, :current_quarter, :home_team, :visitor_team, :coach, :week, players_attributes: 
         [:id, :jersey_number, :name, :quarter_one_plays, :quarter_two_plays, :quarter_three_plays, :quarter_four_plays,
-        :position, :comment, :overtime_plays, :_destroy],
+        :position, :comment, :overtime_plays, :active, :_destroy],
         score_attributes:[:id, :home_quarter_one, :home_quarter_two, :home_quarter_three, :home_quarter_four,
         :visit_quarter_one, :visit_quarter_two, :visit_quarter_three, :visit_quarter_four, :home_overtime, :visit_overtime, :_destroy])
     end
