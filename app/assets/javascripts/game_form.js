@@ -58,7 +58,6 @@ function player_activation(button){
     if(row.classList[1] == "tr-green"){
       $(row).removeClass("tr-green");
       $(row).addClass("tr-grey");
-<<<<<<< HEAD
       $(button).html('Off');
       $(button).removeClass("btn-on-field");
       $(button).addClass("btn-off-field");
@@ -71,13 +70,6 @@ function player_activation(button){
       $(button).removeClass("btn-off-field");
       $(button).addClass("btn-on-field");
       checkbox.checked = true;
-=======
-      $(button).html('Off Field');
-    } else if (row.classList[1] == "tr-grey") {
-      $(row).removeClass("tr-grey");
-      $(row).addClass("tr-green");
-      $(button).html('On Field');
->>>>>>> parent of 2094cd8... Adjusted colors and fixed active functionality
     }
 }
   
