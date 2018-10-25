@@ -7,7 +7,6 @@ document.addEventListener("turbolinks:load", function() {
         check_activations();
     }
 })
-
   
   function quarter_to_word (num){
     var numString = "";
