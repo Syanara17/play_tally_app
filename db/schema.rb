@@ -40,7 +40,7 @@ ActiveRecord::Schema.define(version: 20181024192849) do
     t.datetime "updated_at", null: false
     t.integer "game_id"
     t.integer "overtime_plays"
-    t.boolean "active"
+    t.integer "active"
     t.index ["game_id"], name: "index_players_on_game_id"
   end
 
