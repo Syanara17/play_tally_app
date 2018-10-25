@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181006041217) do
+ActiveRecord::Schema.define(version: 20181024192849) do
 
   create_table "games", force: :cascade do |t|
     t.string "home_team"
@@ -40,6 +40,7 @@ ActiveRecord::Schema.define(version: 20181006041217) do
     t.datetime "updated_at", null: false
     t.integer "game_id"
     t.integer "overtime_plays"
+    t.boolean "active"
     t.index ["game_id"], name: "index_players_on_game_id"
   end
 
