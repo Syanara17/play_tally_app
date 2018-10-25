@@ -80,7 +80,7 @@
             %td.tdcenter Comments:
             %td.tdcenter Remove Player Button
         %tbody.player
-          = f.simple_fields_for :players do |player|
+          = f.simple_fields_for :players, f.object.players.order(:jersey_number) do |player|
             = render 'player_fields', f: player
       .links
         = link_to_add_association 'add player', f, :players, class: 'btn btn-primary', onclick: "dyanmic_quarter_label ()", data: {"association-insertion-node" => "tbody.player", "association-insertion-method" => "append"}
