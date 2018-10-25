@@ -1,3 +1,6 @@
+dyanmic_quarter_label();
+
+
 window.onload = function() {
     $('#player-cocoon').on('cocoon:after-insert', function(e, insertedItem){
         dyanmic_quarter_label();
@@ -35,6 +38,18 @@ window.onload = function() {
     }
     return splitStr.join(' '); 
  }
+
+ function check_activations(){
+        
+    $('.activator').each(function(index, tdNode){
+        checkboxNode = tdNode.children[1].children[0].children[1].children[0]
+        if(checkboxNode.checked == true){
+            player_activation(tdNode.firstElementChild);
+        } 
+    })
+}
+
+
 
   function player_activation(button){
     row = button.parentNode.parentNode
