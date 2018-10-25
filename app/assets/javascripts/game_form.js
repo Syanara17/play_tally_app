@@ -1,8 +1,12 @@
 dyanmic_quarter_label();
 check_activations();
-$('#player-cocoon').on('cocoon:after-insert', function(e, insertedItem){
-    dyanmic_quarter_label();
-});
+window.onload = function() {
+
+    $('#player-cocoon').on('cocoon:after-insert', function(e, insertedItem){
+        dyanmic_quarter_label();
+    });
+}
+
 
 
   function quarter_to_word (num){
