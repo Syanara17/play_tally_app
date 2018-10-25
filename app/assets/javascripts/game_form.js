@@ -39,15 +39,14 @@ window.onload = function() {
     return splitStr.join(' '); 
  }
 
- function check_activations(){
-        
-    $('.activator').each(function(index, tdNode){
-        checkboxNode = tdNode.children[1].children[0].children[1].children[0]
-        if(checkboxNode.checked == true){
-            player_activation(tdNode.firstElementChild);
-        } 
-    })
-}
+//  function check_activations(){
+//     $('.activator').each(function(index, tdNode){
+//         checkboxNode = tdNode.children[1].children[0].children[1].children[0]
+//         if(checkboxNode.checked == true){
+//             player_activation(tdNode.firstElementChild);
+//         } 
+//     })
+// }
 
 
 
