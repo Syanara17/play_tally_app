@@ -1,4 +1,3 @@
-// console.log("RAN");
 dyanmic_quarter_label();
 check_activations();
 $('#player-cocoon').on('cocoon:after-insert', function(e, insertedItem){
